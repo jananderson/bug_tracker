@@ -1,0 +1,409 @@
+﻿@using bug_tracker.Models
+@model UserRolesViewModel
+
+@{
+    ViewBag.Title = "UserTickets";
+}
+
+<div class="card card-inverse card-flat">
+    <div class="card-header">
+        <div class="card-title">User Tickets</div>
+    </div>
+    <div class="card-block row">
+        Below you will find a list of all your tickets, the original submitters, the associated projects, and the assigned developer, if any.
+    </div>
+</div>
+
+    @if (User.IsInRole("ProjectManager"))
+    {
+
+        <div class="card card-inverse card-flat">
+            <div class="card-header">
+                <div class="card-title">Your Projects' Tickets</div>
+            </div>
+            <div class="table-responsive">
+                <table class="table datatable-reorder-realtime">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Actions")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Assigned To")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Owner")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Project")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Priority")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Type")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Issue")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Comments")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Created")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Updated")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.ProjectManTickets)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Drop-Down
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <a class="dropdown-item">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "dropdown-item" })</a>
+                                            <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "dropdown-item" })</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AssignedToUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OwnerUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Project.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketType.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Created)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Updated)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    }
+
+    @if (User.IsInRole("Developer"))
+    {
+        <div class="card card-inverse card-flat">
+            <div class="card-header">
+                <div class="card-title">Tickets Assigned to You</div>
+            </div>
+            <div class="table-responsive">
+                <table class="table datatable-reorder-realtime">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Actions")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Assigned To")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Owner")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Project")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Priority")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Type")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Issue")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Comments")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Created")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Updated")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.DeveloperTickets)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Drop-Down
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            @*<a class="dropdown-item">@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "dropdown-item" })</a>*@
+                                            <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "dropdown-item" })</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AssignedToUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OwnerUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Project.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketType.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Created)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Updated)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card card-inverse card-flat">
+            <div class="card-header">
+                <div class="card-title">Your Projects' Tickets</div>
+            </div>
+            <div class="table-responsive">
+                <table class="table datatable-reorder-realtime">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Actions")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Assigned To")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Owner")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Project")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Priority")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Type")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Issue")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Comments")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Created")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Updated")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.DeveloperProj)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Drop-Down
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "dropdown-item" })</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AssignedToUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OwnerUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Project.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketType.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Created)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Updated)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    }
+
+    @if (User.IsInRole("Submitter"))
+    {
+
+        <div class="card card-inverse card-flat">
+            <div class="card-header">
+                <div class="card-title">Tickets You Submitted</div>
+            </div>
+            <div class="table-responsive">
+                <table class="table datatable-reorder-realtime">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayName("Actions")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Assigned To")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Owner")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Project")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Priority")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Status")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Type")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Issue")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Comments")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Created")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Updated")
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.SubmitterTickets)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Drop-Down
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "dropdown-item" })</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AssignedToUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OwnerUser.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Project.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketPriority.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketStatus.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TicketType.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Created)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Updated)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    }

@@ -1,0 +1,47 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="theme-color" content="#1C2B36" />
+    <title>Buggin' Out</title>
+
+    <!-- Favicon -->
+    <link href="~/Content/Template/img/favicon.ico" rel="apple-touch-icon" type="image/png" sizes="144x144">
+    <link href="~/Content/Template/img/favicon.ico" rel="apple-touch-icon" type="image/png" sizes="114x114">
+    <link href="~/Content/Template/img/favicon.ico" rel="apple-touch-icon" type="image/png" sizes="72x72">
+    <link href="~/Content/Template/img/favicon.ico" rel="apple-touch-icon" type="image/png">
+    <link href="~/Content/Template/img/favicon.ico" rel="icon" type="image/png">
+    <link href="~/Content/Template/img/favicon.ico" rel="shortcut icon">
+    <!-- /Favicon -->
+    <!-- Global stylesheets -->
+    <link type="text/css" rel="stylesheet" href="~/Content/Template/lib/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Template/lib/css/animate.min.css">
+    <link type="text/css" rel="stylesheet" href="~/Content/Template/lib/css/main.css">
+    <!-- /Global stylesheets -->
+</head>
+
+<body>
+
+    @RenderBody()
+
+    <!-- Global scripts -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/Template/lib/js/core/jquery/jquery.js"></script>
+    <script src="~/Content/Template/lib/js/core/jquery/jquery.ui.js"></script>
+    <script src="~/Content/Template/lib/js/core/bootstrap/bootstrap.js"></script>
+    <script src="~/Content/Template/lib/js/core/hammer/hammerjs.js"></script>
+    <script src="~/Content/Template/lib/js/core/hammer/jquery.hammer.js"></script>
+    <script src="~/Content/Template/lib/js/core/slimscroll/jquery.slimscroll.js"></script>
+    <script src="~/Content/Template/lib/js/forms/uniform.min.js"></script>
+    <script src="~/Content/Template/lib/js/core/app/layouts.js"></script>
+    <script src="~/Content/Template/lib/js/core/app/core.js"></script>
+    <!-- /Global scripts -->
+    <!-- Page scripts -->
+    <script src="~/Content/Template/lib/js/pages/auth/authentication.js"></script>
+    <!-- /Page scripts -->
+
+</body>
+</html>

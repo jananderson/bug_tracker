@@ -1,0 +1,155 @@
+﻿@model bug_tracker.Models.Project
+
+@{
+    ViewBag.Title = "AssignProject";
+}
+    <div class="row">
+        <h2>Project: @Html.DisplayFor(model => model.Name)</h2>
+    </div>
+    <div class="row">
+        <h2>Manage Project Users</h2>
+    </div>
+<div class="row">
+        <div class="col-md-6 col-sm-6">
+            <div class="card card-inverse">
+                <div class="card-header">
+                    <div class="card-title">Assign Users</div>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("ManageProjectUsers", "Projects", new { projectId = Model.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group row">
+                            <label class="control-label col-lg-3">Assign Project Managers</label>
+                            <div class="col-lg-9">
+                                @Html.DropDownList("ManagerId", null, "-select-", htmlAttributes: new { @class = "card-body" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-lg-3">Add Developers to Projects</label>
+                            <div class="col-lg-9">
+                                @Html.ListBox("DeveloperIds", null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-lg-3">Add Submitters to Projects</label>
+                            <div class="col-lg-9">
+                                @Html.ListBox("SubmitterIds", null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-info" value="Assign Users" />
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class="card card-inverse">
+                <div class="card-header">
+                    <div class="card-title">Remove Users</div>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("RemoveProjectUsers", "Projects", new { projectId = Model.Id }, FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @*<div class="form-group row">
+                            <label class="control-label col-lg-3">Remove Project Managers</label>
+                            <div class="col-lg-9">
+                                @Html.DropDownList("ManagerId", null, "-select-", htmlAttributes: new { @class = "card-body" })
+                            </div>
+                        </div>*@
+                        <div class="form-group row">
+                            <label class="control-label col-lg-3">Remove Developers from a Projects</label>
+                            <div class="col-lg-9">
+                                @Html.ListBox("AssignedDeveloperIds", null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-lg-3">Remove Submitters from a Projects</label>
+                            <div class="col-lg-9">
+                                @Html.ListBox("AssignedSubmitterIds", null, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-info" value="Remove Users" />
+                    }
+                </div>
+            </div>
+        </div>
+</div>
+<div class="row">
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+</div>
+
+    @*@using (Html.BeginForm("ManageProjectUsers", "Projects", new { projectId = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Project Managers</h4>
+                <p>Add project managers to a project</p>
+                <div class="form-group text-center">
+                    @Html.DropDownList("ManagerId", null, "-select-", htmlAttributes: new { @class = "card-body" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Developers</h4>
+                <p>Add developers to a project</p>
+                <div class="form-group text-center">
+                    @Html.DropDownList("DeveloperIds", null, "-select-", htmlAttributes: new { @class = "card-body" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Submitters</h4>
+                <p>Change submitter</p>
+                <div class="form-group text-center">
+                    @Html.DropDownList("SubmitterIds", null, "-select-", htmlAttributes: new { @class = "card-body" })
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-info" value="Assign Users" />
+    }
+
+    <h2>Remove Project Users</h2>
+
+    @using (Html.BeginForm("RemoveProjectUsers", "Projects", new { projectId = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Project Managers</h4>
+                <p>Remove project managers to a project</p>
+                <div class="form-group text-center">
+                    @Html.DropDownList("ManagerId", null, htmlAttributes: new { @class = "card-body" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Developers</h4>
+                <p>Remove developers to a project</p>
+                <div class="form-group text-center">
+                    @Html.DropDownList("DeveloperIds", null, htmlAttributes: new { @class = "card-body" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h4>Submitters</h4>
+                <p>Remove submitter</p>
+                <div class="form-group text-center">
+                    @Html.DropDownList("SubmitterIds", null, htmlAttributes: new { @class = "card-body" })
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-info" value="Remove Users" />
+    }*@
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "AssignProject";
+}
+
+<h2>Assign Project Users</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h4>Project Managers</h4>
+            <p>Add project managers to a project</p>
+            <div class="form-group text-center">
+                @Html.DropDownList("ProjectManagerId", null, "-select-", htmlAttributes: new { @class = "card-body" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h4>Developers</h4>
+            <p>Add developers to a project</p>
+            <div class="form-group text-center">
+                @Html.ListBox("AssignedToUserIds", null, htmlAttributes: new { @class = "card-body" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h4>Submitters</h4>
+            <p>Change submitter</p>
+            <div class="form-group text-center">
+                @Html.ListBox("SubmitterIds", null, htmlAttributes: new { @class = "card-body" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h4>Submitters</h4>
+            <p>Change submitter</p>
+            <div class="form-group text-center">
+                @Html.ListBox("Projects", null, htmlAttributes: new { @class = "card-body" })
+            </div>
+        </div>
+    </div>
+
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
