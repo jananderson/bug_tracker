@@ -7,9 +7,27 @@
 
 @if (User.IsInRole("Admin"))
 {
+
+    <div class="card card-inverse">
+        <div class="header">
+            <div class="header-content">
+                <div class="page-title">
+                    <i class="icon-user-cancel x6 position-left"></i> Remove Roles Assigned To A User
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-inverse card-flat">
+        <div class="card-header">
+            @*<div class="card-title">Create a project</div>*@
+        </div>
+        <div class="card-block row">
+            Use the below drop down lists to first select a user then select a role you would like to unassign to that user. A searchable table of all users and their roles has been provided for reference.
+        </div>
+    </div>
     <div class="card card-inverse">
         <div class="card-header">
-            <div class="card-title">Remove User Roles</div>
+            @*<div class="card-title">Remove User Roles</div>*@
         </div>
         <div class="card-block">
             @using (Html.BeginForm("RemoveUserRole", "Roles", FormMethod.Post))

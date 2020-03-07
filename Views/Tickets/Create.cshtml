@@ -5,9 +5,31 @@
 }
 @if (User.IsInRole("Submitter"))
 {
+
+    <div class="card card-inverse">
+        <div class="header">
+            <div class="header-content">
+                <div class="page-title">
+                    <i class="icon-ticket x6 position-left"></i> Submit A New Ticket
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-inverse card-flat">
+        <div class="card-header">
+            @*<div class="card-title">Create a project</div>*@
+        </div>
+        <div class="card-block row">
+            <p>Use the below form to create a new ticket. Provide the issue, a detailed description, and select the project associated with the issue. Please indicate the type, priority, and status of your ticket.</p>
+
+            <p>You may provide any supplementary documentation by adding a ticket attachment at this time. Attachments may be in the form of PDF or DOC files or images.</p>
+        </div>
+    </div>
+
     <div class="card card-inverse ">
         <div class="card-header">
-            <div class="card-title">Create A New Ticket</div>
+            @*<div class="card-title">Create A New Ticket</div>*@
         </div>
         <div class="card-block">
             @using (Html.BeginForm("Create", "Tickets", FormMethod.Post, new { enctype = "Multipart/form-data" }))
@@ -86,10 +108,10 @@
         </div>
     </div>
 }
-    @*<div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>*@
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

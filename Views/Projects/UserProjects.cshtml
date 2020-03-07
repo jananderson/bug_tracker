@@ -5,6 +5,23 @@
     ViewBag.Title = "UserTickets";
 }
 
+    <div class="card card-inverse">
+        <div class="header">
+            <div class="header-content">
+                <div class="page-title">
+                    <i class="icon-briefcase x6 position-left"></i> Your Projects
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-inverse card-flat">
+        <div class="card-header">
+            @*<div class="card-title">User Tickets</div>*@
+        </div>
+        <div class="card-block row">
+            Below you will find a list of all your projects, all assigned users, the project's assigned users, and the assigned project manager.
+        </div>
+    </div>
 @if (User.IsInRole("Admin"))
 {
 

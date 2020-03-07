@@ -5,75 +5,89 @@
 }
 @if (User.IsInRole("ProjectManager") || User.IsInRole("Admin"))
 {
+    <div class="card card-inverse">
+        <div class="header">
+            <div class="header-content">
+                <div class="page-title">
+                    <i class="icon-briefcase x6 position-left"></i> All Projects
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-inverse card-flat">
+        <div class="card-header">
+            @*<div class="card-title">User Tickets</div>*@
+        </div>
+        <div class="card-block row">
+            Below you will find a list of all your projects, all assigned users, the project's assigned users, and the assigned project manager.
+        </div>
+    </div>
     <!-- Row reordering datatable -->
     <div class="card card-inverse card-flat">
         <div class="card-header">
-            <div class="card-title">All Projects</div>
-        </div>
-        <div class="card-block row">
-            Below you will find a list of all projects, the assigned Project Managers, and all assigned users.
+            <div class="card-title">Your Projects' Tickets</div>
         </div>
         <div class="table-responsive">
-            <table class="table datatable-reorder-realtime">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayName("Actions")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Title")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Project Manager")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Tickets")
-                        </th>
-                        <th>
-                            @Html.DisplayName("Users")
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+                <table class="table datatable-reorder-realtime">
+                    <thead>
                         <tr>
-                            <td class="text-center">
-                                <div class="btn-group" role="group">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Drop-Down
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        @if (User.IsInRole("Admin") || User.IsInRole("ProjectManager"))
-                                        {
-                                            <a class="dropdown-item">@Html.ActionLink("Edit", "Edit", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
-                                            <a class="dropdown-item">@Html.ActionLink("Assign a Developer", "ManageProjectUsers", new { projectId = item.Project.Id }, new { @class = "dropdown-item" })</a>
-                                        }
-                                        <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Project.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ProjectManagerName)
-                            </td>
-                            <td>
-                                @item.Project.Tickets.Count()
-                            </td>
-
-                            <td>
-                                @foreach (var user in item.Project.Users)
-                                {
-                                    <p>@user.FirstName @user.LastName</p>
-                                }
-                            </td>
+                            <th>
+                                @Html.DisplayName("Actions")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Title")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Project Manager")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Tickets")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Users")
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Drop-Down
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            @if (User.IsInRole("Admin") || User.IsInRole("ProjectManager"))
+                                            {
+                                                <a class="dropdown-item">@Html.ActionLink("Edit", "Edit", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
+                                                <a class="dropdown-item">@Html.ActionLink("Assign a Developer", "ManageProjectUsers", new { projectId = item.Project.Id }, new { @class = "dropdown-item" })</a>
+                                            }
+                                            <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Project.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProjectManagerName)
+                                </td>
+                                <td>
+                                    @item.Project.Tickets.Count()
+                                </td>
+
+                                <td>
+                                    @foreach (var user in item.Project.Users)
+                                    {
+                                        <p>@user.FirstName @user.LastName</p>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
         </div>
     </div>
 }
-    <!-- /Row reordering datatable -->
+<!-- /Row reordering datatable -->

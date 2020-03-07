@@ -7,6 +7,23 @@
 @if (User.IsInRole("Admin"))
 {
     <div class="card card-inverse">
+        <div class="header">
+            <div class="header-content">
+                <div class="page-title">
+                    <i class="icon-user-plus x6 position-left"></i> Assign New Roles To A User
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-inverse card-flat">
+        <div class="card-header">
+            @*<div class="card-title">Create a project</div>*@
+        </div>
+        <div class="card-block row">
+            Use the below drop down lists to first select a user then select a role you would like to assign to the selected user. A searchable table of all users and their roles has been provided for reference.
+        </div>
+    </div>
+    <div class="card card-inverse">
         <div class="card-header">
             <div class="card-title">Assign User Roles</div>
         </div>

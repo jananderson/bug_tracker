@@ -4,45 +4,64 @@
     ViewBag.Title = "Create";
 }
 
-                <div class="card card-inverse">
-                    <div class="card-header">
-                        <div class="card-title">Create A New Project</div>
-                    </div>
-                    <div class="card-block">
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                        <div class="form-group row">
-                            <div class="col-md-9">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
-                                @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-3">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-9">
-                                <p>Select A Project Manager</p>
-                                @Html.DropDownListFor(model => model.ProjectManagerId, null, htmlAttributes: new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.ProjectManagerId, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-3">
-                            </div>
-                        </div>
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn btn-info btn-md" />
-                                </div>
-                            </div>
-                            }
-                        </div>
-                </div>
-            @*<div>
-                @Html.ActionLink("Back to List", "Index")
-            </div>*@
+<div class="card card-inverse">
+    <div class="header">
+        <div class="header-content">
+            <div class="page-title">
+                <i class="icon-briefcase x6 position-left"></i> Create A New Project
+            </div>
+        </div>
+    </div>
+</div>
 
-            @section Scripts {
-                @Scripts.Render("~/bundles/jqueryval")
-            }
+<div class="card card-inverse card-flat">
+    <div class="card-header">
+        @*<div class="card-title">Create a project</div>*@
+    </div>
+    <div class="card-block row">
+        Use the below form to create a new project. Provide a name for the new project and assign an initial Project Manager to begin the new project.
+    </div>
+</div>
+
+<div class="card card-inverse">
+    <div class="card-header">
+        @*<div class="card-title">Create A New Project</div>*@
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group row">
+                <div class="col-md-9">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-9">
+                    <p>Select A Project Manager</p>
+                    @Html.DropDownListFor(model => model.ProjectManagerId, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ProjectManagerId, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-info btn-md" />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
