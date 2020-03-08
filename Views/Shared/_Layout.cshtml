@@ -218,29 +218,35 @@
                     <ul class="sidebar-accordion">
                         <li><a href="@Url.Action("Index", "Home")"><i class="icon-display4"></i><span class="list-label"> Tracker Dashboard</span></a></li>
                         <li>
-                            <a href="#"><i class="icon-cash"></i> <span>Tickets</span></a>
-                            <ul>
-                                @if (User.IsInRole("Submitter"))
-                                {
-                                    <li><a href="@Url.Action("Create", "Tickets")">Submit A Ticket</a></li>
-                                }
-                                @if (User.IsInRole("Submitter") || User.IsInRole("ProjectManager") || User.IsInRole("Developer"))
-                                {
-                                    <li><a href="@Url.Action("UserTickets", "Tickets")">My Tickets</a></li>
-                                }
-                                <li><a href="@Url.Action("Index", "Tickets")">All Tickets</a></li>
-                            </ul>
-                        </li>
+                            @if (User.IsInRole("Submitter") || User.IsInRole("ProjectManager") || User.IsInRole("Developer") || User.IsInRole("Admin"))
+                            {
+                                <a href="#"><i class="icon-cash"></i> <span>Tickets</span></a>
+                                <ul>
+                                    @if (User.IsInRole("Submitter"))
+                                    {
+                                        <li><a href="@Url.Action("Create", "Tickets")">Submit A Ticket</a></li>
+                                    }
+                                    @if (User.IsInRole("Submitter") || User.IsInRole("ProjectManager") || User.IsInRole("Developer"))
+                                    {
+                                        <li><a href="@Url.Action("UserTickets", "Tickets")">My Tickets</a></li>
+                                    }
+                                    <li><a href="@Url.Action("Index", "Tickets")">All Tickets</a></li>
+                                </ul>
+                            }
+                            </li>
                         <li>
-                            <a href="#"><i class="icon-briefcase"></i> <span>Projects</span></a>
-                            <ul>
-                                <li><a href="@Url.Action("UserProjects", "Projects")">My Projects</a></li>
-                                @if (User.IsInRole("Admin") || User.IsInRole("ProjectManager"))
-                                {
+                            @if (User.IsInRole("Submitter") || User.IsInRole("ProjectManager") || User.IsInRole("Developer") || User.IsInRole("Admin"))
+                            {
+                                <a href="#"><i class="icon-briefcase"></i> <span>Projects</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("UserProjects", "Projects")">My Projects</a></li>
+                                    @if (User.IsInRole("Admin") || User.IsInRole("ProjectManager"))
+                                    {
                                     <li><a href="@Url.Action("Index", "Projects")">All Projects</a></li>
                                     <li><a href="@Url.Action("Create", "Projects")">Start A Project</a></li>
-                                }
-                            </ul>
+                                    }
+                                </ul>
+                            }
                         </li>
                         @if (User.IsInRole("Admin"))
                         {

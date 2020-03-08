@@ -21,6 +21,7 @@ namespace bug_tracker.Controllers
         private TicketHistoryHelper ticketHistoryHelper = new TicketHistoryHelper();
         private TicketDetailsViewModel ticketDetailsViewModel = new TicketDetailsViewModel();
         private ProjectHelper projectHelper = new ProjectHelper();
+        private UserRolesViewModel userRolesViewModel = new UserRolesViewModel();
 
         // GET: Tickets
         [Authorize]
@@ -58,54 +59,54 @@ namespace bug_tracker.Controllers
         }
 
         // GET: Tickets/Details/5
-        public ActionResult Details(int? id)
-
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var ticket = db.Tickets.Find(id);
-            if (ticket == null)
-            {
-                return HttpNotFound();
-            }
-            TicketDetailsViewModel TicketDetailsVM = new TicketDetailsViewModel();
-            TicketDetailsVM.Histories = db.TicketHistories.Where(tH => tH.TicketId == id).ToList();
-            return View(ticket);
-        }
-
-
         //public ActionResult Details(int? id)
 
         //{
-        //    UserRolesHelper userRolesHelper = new UserRolesHelper();
-        //    UserRolesViewModel userRoles = new UserRoles();
-        //    var userId = User.Identity.GetUserId();
-        //    TicketHelper ticketHelper = new TicketHelper();
-        //    Ticket ticket = db.Tickets.Find(id);
-
         //    if (id == null)
         //    {
         //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         //    }
-
+        //    var ticket = db.Tickets.Find(id);
         //    if (ticket == null)
         //    {
         //        return HttpNotFound();
         //    }
-
-        //    var userTickets = ticketHelper.GetUserTickets(userId);
-
-        //    if (userTickets.Any(t => t.Id == ticket.Id) || User.IsInRole("Admin"))
-        //    {
-        //        TicketDetailsViewModel TicketDetailsVM = new TicketDetailsViewModel();
-        //        TicketDetailsVM.Histories = db.TicketHistories.Where(tH => tH.TicketId == id).ToList();
-        //        return View(ticket);
-        //    }
-        //    return RedirectToAction("Index", "Home");
-
+        //    TicketDetailsViewModel TicketDetailsVM = new TicketDetailsViewModel();
+        //    TicketDetailsVM.Histories = db.TicketHistories.Where(tH => tH.TicketId == id).ToList();
+        //    return View(ticket);
         //}
+
+        // GET: Tickets/Details/5
+        public ActionResult Details(int? id)
+
+        {
+            UserRolesHelper userRolesHelper = new UserRolesHelper();
+            //UserRolesViewModel userRoles = userRolesViewModel();
+            var userId = User.Identity.GetUserId();
+            TicketHelper ticketHelper = new TicketHelper();
+            Ticket ticket = db.Tickets.Find(id);
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+
+            var userTickets = ticketHelper.GetUserTickets(userId);
+
+            if (userTickets.Any(t => t.Id == ticket.Id) || User.IsInRole("Admin"))
+            {
+                TicketDetailsViewModel TicketDetailsVM = new TicketDetailsViewModel();
+                TicketDetailsVM.Histories = db.TicketHistories.Where(tH => tH.TicketId == id).ToList();
+                return View(ticket);
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
 
 
 
@@ -235,8 +236,13 @@ namespace bug_tracker.Controllers
             base.Dispose(disposing);
         }
         // GET: Tickets/AssignTicket
+        [Authorize(Roles = "ProjectManager, Admin")]
         public ActionResult AssignTicket(int? id)
         {
+            if (!User.IsInRole("ProjectManager")|| !User.IsInRole("Admin"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             UserRolesHelper helper = new UserRolesHelper();
             var ticket = db.Tickets.Find(id);
             var users = helper.UsersInRole("Developer").ToList();

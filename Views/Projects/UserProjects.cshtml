@@ -52,13 +52,13 @@
                 </thead>
                 <tbody>
 
-                    @foreach (var item in Model.ProjectManProjs)
+                    @foreach (var item in Model.AdminProjs)
                     {
                         <tr>
                             <td class="text-center">
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Drop-Down
+                                       Actions
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                         @if (User.IsInRole("Admin"))
@@ -130,8 +130,8 @@
                         <tr>
                             <td class="text-center">
                                 <div class="btn-group" role="group">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Drop-Down
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Actions
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                         @if (User.IsInRole("Admin"))
@@ -179,9 +179,9 @@
             <table class="table datatable-reorder-realtime">
                 <thead>
                     <tr>
-                        <th>
+                        @*<th>
                             @Html.DisplayName("Actions")
-                        </th>
+                        </th>*@
                         <th>
                             @Html.DisplayName("Title")
                         </th>
@@ -201,7 +201,7 @@
                     @foreach (var item in Model.DeveloperProjs)
                     {
                         <tr>
-                            <td class="text-center">
+                            @*<td class="text-center">
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Drop-Down
@@ -215,7 +215,7 @@
                                         <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
                                     </div>
                                 </div>
-                            </td>
+                            </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Project.Name)
                             </td>
@@ -252,9 +252,9 @@
             <table class="table datatable-reorder-realtime">
                 <thead>
                     <tr>
-                        <th>
+                        @*<th>
                             @Html.DisplayName("Actions")
-                        </th>
+                        </th>*@
                         <th>
                             @Html.DisplayName("Title")
                         </th>
@@ -274,7 +274,7 @@
                     @foreach (var item in Model.SubmitterProjs)
                     {
                         <tr>
-                            <td class="text-center">
+                            @*<td class="text-center">
                                 <div class="btn-group" role="group">
                                     <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Drop-Down
@@ -288,7 +288,7 @@
                                         <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
                                     </div>
                                 </div>
-                            </td>
+                            </td>*@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Project.Name)
                             </td>
