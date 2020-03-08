@@ -61,7 +61,7 @@
                                             @if (User.IsInRole("Admin") || User.IsInRole("ProjectManager"))
                                             {
                                                 <a class="dropdown-item">@Html.ActionLink("Edit", "Edit", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
-                                                <a class="dropdown-item">@Html.ActionLink("Assign a Developer", "ManageProjectUsers", new { projectId = item.Project.Id }, new { @class = "dropdown-item" })</a>
+                                                <a class="dropdown-item">@Html.ActionLink("Manage Project Users", "ManageProjectUsers", new { projectId = item.Project.Id }, new { @class = "dropdown-item" })</a>
                                             }
                                             <a class="dropdown-item">@Html.ActionLink("Details", "Details", new { id = item.Project.Id }, new { @class = "dropdown-item" })</a>
                                         </div>

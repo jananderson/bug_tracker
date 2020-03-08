@@ -21,8 +21,13 @@ namespace bug_tracker.Controllers
         private ProjectHelper projHelper = new ProjectHelper();
 
         // GET: Projects/AssignProject
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult ManageProjectUsers(int? projectId)
         {
+            if (!User.IsInRole("Admin, ProjectManager"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             var project = db.Projects.FirstOrDefault(p => p.Id == projectId);
 
             var managers = helper.UsersInRole("ProjectManager");
@@ -295,8 +300,13 @@ namespace bug_tracker.Controllers
         }
 
         // GET: Projects/Create
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Create()
         {
+            if (!User.IsInRole("Admin, ProjectManager"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             ProjectCreateViewModel projectCreateViewModel = new ProjectCreateViewModel();
 
             var PMList = helper.UsersInRole("ProjectManager");
@@ -324,8 +334,13 @@ namespace bug_tracker.Controllers
         }
 
         // GET: Projects/Edit/5
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Edit(int? id)
         {
+            if (!User.IsInRole("Admin, ProjectManager"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

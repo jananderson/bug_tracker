@@ -200,14 +200,14 @@
                                     @Html.AntiForgeryToken()
                             <div class="admin-user-info text-left">
                                 <ul>
-                                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-user-pointer"></i><span class="list-label" style="color: #8da4bb;"> LOG OFF</span></a></li>
+                                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-user-pointer"></i><span class="list-label" style="color: #8da4bb;"> LOG OUT</span></a></li>
                                 </ul>
                                 <ul>
                                     <li><a href="@Url.Action("Index", "Manage")"><i class="icon-user-edit"></i><span class="list-label" style="color: #8da4bb;"> EDIT PROFILE</span></a></li>
                                 </ul>
                             </div>
-                                        }
-                                        }
+                                }
+                             }
                                 </div>
                     </div>
 
@@ -224,7 +224,10 @@
                                 {
                                     <li><a href="@Url.Action("Create", "Tickets")">Submit A Ticket</a></li>
                                 }
-                                <li><a href="@Url.Action("UserTickets", "Tickets")">My Tickets</a></li>
+                                @if (User.IsInRole("Submitter") || User.IsInRole("ProjectManager") || User.IsInRole("Developer"))
+                                {
+                                    <li><a href="@Url.Action("UserTickets", "Tickets")">My Tickets</a></li>
+                                }
                                 <li><a href="@Url.Action("Index", "Tickets")">All Tickets</a></li>
                             </ul>
                         </li>

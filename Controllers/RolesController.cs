@@ -14,8 +14,13 @@ namespace bug_tracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         private UserRolesHelper helper = new UserRolesHelper();
         // GET: Assign User Roles
+        [Authorize(Roles = "Admin")]
         public ActionResult AssignUserRole()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             ViewBag.UserList = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.RoleList = new SelectList(db.Users, "Id", "FirstName");
             AssignUserRoleViewModel model = new AssignUserRoleViewModel();
@@ -41,8 +46,13 @@ namespace bug_tracker.Controllers
         }
 
         // GET: Remove User Roles
+        [Authorize(Roles = "Admin")]
         public ActionResult RemoveUserRole()
         {
+            if (!User.IsInRole("Admin"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             //ViewBag.UserList = new SelectList(db.Users, "Id", "FirstName");
             //ViewBag.RoleList = new SelectList(db.Users, "Id", "FirstName");
             RemoveUserRoleViewModel model = new RemoveUserRoleViewModel();

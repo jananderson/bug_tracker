@@ -240,7 +240,7 @@ namespace bug_tracker.Controllers
             UserRolesHelper helper = new UserRolesHelper();
             var ticket = db.Tickets.Find(id);
             var users = helper.UsersInRole("Developer").ToList();
-            ViewBag.AssignedToUserId = new SelectList(users, "Id", "Email", ticket.AssignedToUserId);
+            ViewBag.AssignedToUserId = new SelectList(users, "Id", "FirstName", ticket.AssignedToUserId);
             return View(ticket);
         }
         // POST: Tickets/AssignTicket

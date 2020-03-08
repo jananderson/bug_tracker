@@ -4,48 +4,83 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <h4>Project</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+<div class="card card-inverse">
+    <div class="header">
+        <div class="header-content">
+            <div class="page-title">
+                <i class="icon-briefcase x6 position-left"></i> Edit An Existing Project
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.Label("Project Manager", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.ProjectManagerId, null, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
+</div>
 
-    @*<div class="form-group">
-        @Html.Label("Developer", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Users, null, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
+<div class="card card-inverse card-flat">
+    <div class="card-header">
+        @*<div class="card-title">Create a project</div>*@
+    </div>
+    <div class="card-block row">
+        <p>Use this form for editing an existing project. To create a new project go <a href="@Url.Action("Create", "Projects")"><span class="list-label" style="color: #8da4bb;">HERE</span></a>.</p>
+    </div>
+</div>
+
+
+<div class="card card-inverse">
+    <div class="card-header">
+        @*<div class="card-title">Edit Ticket</div>*@
+    </div>
+    <div class="card-block">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group row">
+                <div class="col-md-9">
+                    <h4>Current Project Name:</h4> <p>@Html.DisplayFor(model => model.Name)</p>
+                    <hr />
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-9">
+                    <p>If you would like to change the Project Name, enter the new Project Name below.</p>
+                    <p>If you do not want to want to change the Project Name, no additional action is required.</p>
+                    <p>Rename the Project</p>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-md-9">
+                    <p>If you would like to assign a different Project Manager, make a new selection below.</p>
+                    <p>If you do not want to assign a different Project Manager, no additional action is required.</p>
+                    <p>Reassign the Project Manager</p>
+                    @Html.DropDownListFor(model => model.ProjectManagerId, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ProjectManagerId, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Edit" class="btn btn-info btn-md" />
+                </div>
+            </div>
+            @*<div class="form-group">
+                    @Html.Label("Developer", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(m => m.Users, null, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>*@
+        }
+    </div>
+</div>
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
     </div>*@
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
