@@ -193,6 +193,11 @@
                 <div class="">
                     <div class="user-profile-container">
                         <div class="user-profile clearfix">
+                            @if (Request.IsAuthenticated)
+                            {
+                                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
                             <div class="admin-user-info text-left">
                                 <ul>
                                     <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-user-pointer"></i><span class="list-label" style="color: #8da4bb;"> LOG OFF</span></a></li>
@@ -201,7 +206,9 @@
                                     <li><a href="@Url.Action("Index", "Manage")"><i class="icon-user-edit"></i><span class="list-label" style="color: #8da4bb;"> EDIT PROFILE</span></a></li>
                                 </ul>
                             </div>
-                        </div>
+                                        }
+                                        }
+                                </div>
                     </div>
 
                 </div>

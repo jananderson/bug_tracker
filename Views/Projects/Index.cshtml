@@ -19,7 +19,7 @@
             @*<div class="card-title">User Tickets</div>*@
         </div>
         <div class="card-block row">
-            Below you will find a list of all your projects, all assigned users, the project's assigned users, and the assigned project manager.
+            Below you will find a list of all projects, all assigned users, the project's assigned users, and the assigned project manager.
         </div>
     </div>
     <!-- Row reordering datatable -->
@@ -54,8 +54,8 @@
                             <tr>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Drop-Down
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            actions
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             @if (User.IsInRole("Admin") || User.IsInRole("ProjectManager"))

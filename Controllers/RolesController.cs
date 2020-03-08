@@ -16,8 +16,8 @@ namespace bug_tracker.Controllers
         // GET: Assign User Roles
         public ActionResult AssignUserRole()
         {
-            //ViewBag.UserList = new SelectList(db.Users, "Id", "FirstName");
-            //ViewBag.RoleList = new SelectList(db.Users, "Id", "FirstName");
+            ViewBag.UserList = new SelectList(db.Users, "Id", "FirstName");
+            ViewBag.RoleList = new SelectList(db.Users, "Id", "FirstName");
             AssignUserRoleViewModel model = new AssignUserRoleViewModel();
             model.UserId = new SelectList(db.Users, "Id", "FirstName");
             model.RoleName = new SelectList(db.Roles, "Name", "Name");
@@ -32,7 +32,7 @@ namespace bug_tracker.Controllers
         {
             if (helper.AddUserToRole(UserId, RoleName))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("AssignUserRole", "Roles");
             }
             else
             {
@@ -59,7 +59,7 @@ namespace bug_tracker.Controllers
         {
             if (helper.RemoveUserFromRole(UserId, RoleName))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("RemoveUserRole", "Roles");
             }
             else
             {

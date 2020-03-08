@@ -113,6 +113,10 @@ namespace bug_tracker.Controllers
         [Authorize(Roles = "Submitter")]
         public ActionResult Create()
         {
+            if (!User.IsInRole("Submitter"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
@@ -159,7 +163,7 @@ namespace bug_tracker.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AssignedToUserId = new SelectList(roleHelper.UsersInRole("Developer"), "Id", "Email", ticket.AssignedToUserId);
+            ViewBag.AssignedToUserId = new SelectList(roleHelper.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedToUserId);
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
             ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketPriorityId = new SelectList(db.Priorities, "Id", "Name", ticket.TicketPriorityId);
