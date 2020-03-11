@@ -84,43 +84,48 @@ namespace bug_tracker.Controllers
                 }
             //}
 
-            return RedirectToAction("Index", "Projects");
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         // POST: Projects/AssignProject
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult RemoveProjectUsers(string managerId, List<string> developerIds, List<string> submitterIds, int projectId)
+        public ActionResult RemoveProjectUsers(string managerId, List<string> AssignedDeveloperIds, List<string> AssignedSubmitterIds, int projectId)
         {
             //foreach (var projectId in projectId)
             //{
-            if (!string.IsNullOrEmpty(managerId))
-            {
-                //if (!projHelper.IsUserOnProject(managerId, projectId.Value))
-                projHelper.RemoveProjectManager(managerId, projectId);
-            }
+            //if (!string.IsNullOrEmpty(managerId))
+            //{
+            //    if (!projHelper.IsUserOnProject(managerId, projectId.Value))
+            //        projHelper.RemoveProjectManager(managerId, projectId);
+            //}
 
-            if (developerIds != null)
+            if (AssignedDeveloperIds != null)
             {
-                foreach (var devId in developerIds)
+                foreach (var devId in AssignedDeveloperIds)
                 {
                     if (projHelper.IsUserOnProject(devId, projectId))
+                    {
                         projHelper.RemoveUserFromProject(devId, projectId);
+                    }
                 }
             }
 
-            if (submitterIds != null)
+            if (AssignedSubmitterIds != null)
             {
-                foreach (var submitterId in submitterIds)
+                foreach (var submitterId in AssignedSubmitterIds)
                 {
                     if (projHelper.IsUserOnProject(submitterId, projectId))
+                    {
                         projHelper.RemoveUserFromProject(submitterId, projectId);
+                    }
+                        
                 }
             }
             //}
 
-            return RedirectToAction("Index", "Projects");
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         // GET: Projects with authorization

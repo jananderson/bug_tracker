@@ -98,7 +98,7 @@ namespace bug_tracker.Controllers
 
             var userTickets = ticketHelper.GetUserTickets(userId);
 
-            if (userTickets.Any(t => t.Id == ticket.Id) || User.IsInRole("Admin"))
+            if (userTickets.Any(t => t.Id == ticket.Id) || User.IsInRole("Admin") || ticket.Project.ProjectManagerId == User.Identity.GetUserId() )
             {
                 TicketDetailsViewModel TicketDetailsVM = new TicketDetailsViewModel();
                 TicketDetailsVM.Histories = db.TicketHistories.Where(tH => tH.TicketId == id).ToList();
@@ -118,9 +118,11 @@ namespace bug_tracker.Controllers
             {
                 RedirectToAction("Index", "Home");
             }
+
+            var userProjects = projectHelper.ListUserProjects(User.Identity.GetUserId());
             ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            ViewBag.ProjectId = new SelectList(userProjects, "Id", "Name");
             ViewBag.TicketPriorityId = new SelectList(db.Priorities, "Id", "Name");
             ViewBag.TicketStatusId = new SelectList(db.Statuses, "Id", "Name");
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
@@ -153,8 +155,13 @@ namespace bug_tracker.Controllers
         }
 
         // GET: Tickets/Edit/5
+        [Authorize(Roles = "ProjectManager, Admin, Developer")]
         public ActionResult Edit(int? id)
         {
+            if (!User.IsInRole("ProjectManager") || !User.IsInRole("Admin") || !User.IsInRole("Developer"))
+            {
+                RedirectToAction("Index", "Home");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -257,6 +264,8 @@ namespace bug_tracker.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             var ticket = db.Tickets.Find(model.Id);
             ticket.AssignedToUserId = model.AssignedToUserId;
+            var assignedUser = db.Users.Find(model.AssignedToUserId);
+            assignedUser.Projects.Add(ticket.Project);
 
             db.SaveChanges();
 
@@ -279,7 +288,7 @@ namespace bug_tracker.Controllers
             {
                 await Task.FromResult(0);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("UserTickets");
         }
     }
 }

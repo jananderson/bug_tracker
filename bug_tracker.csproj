@@ -1427,6 +1427,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\doc.png" />
     <Content Include="Images\file.png" />
+    <Content Include="Images\jpg.png" />
     <Content Include="Images\pdf.png" />
     <Content Include="private.config" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1654,6 +1655,10 @@
     <Content Include="Content\Template\lib\scss\_rightbar.scss" />
     <Content Include="Attachments\BugTrackerPermissions_020320.pdf" />
     <Content Include="Attachments\JqueryPlugins-TinyMCE.pdf" />
+    <Content Include="Attachments\EStatement-2019-01-14-51985.pdf" />
+    <Content Include="Attachments\mailing_label.pdf" />
+    <Content Include="Attachments\Online Return Center.pdf" />
+    <Content Include="Attachments\SRS - Financial Portal - 030318.pdf" />
     <None Include="Properties\PublishProfiles\bugtracker20200217040254 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\janandersondevbugtracker - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

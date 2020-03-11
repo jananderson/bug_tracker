@@ -5,7 +5,6 @@
 }
 @if (User.IsInRole("Submitter"))
 {
-
     <div class="card card-inverse">
         <div class="header">
             <div class="header-content">
@@ -18,15 +17,17 @@
 
     <div class="card card-inverse card-flat">
         <div class="card-header">
-            @*<div class="card-title">Create a ticket</div>*@
+            @*<div class="card-title">Ticket Details</div>*@
         </div>
-        <div class="card-block row">
-            <p>Use the below form to create a new ticket. Provide the issue, a detailed description, and select the project associated with the issue. Please indicate the type, priority, and status of your ticket.</p>
-
-            <p>You may provide any supplementary documentation by adding a ticket attachment at this time. Attachments may be in the form of PDF or DOC files or images.</p>
+        <div class="card-block">
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <h5>Use the below form to create a new ticket. Provide the issue, a detailed description, and select the project associated with the issue. Please indicate the type, priority, and status of your ticket</h5>
+                    <h5>You may provide any supplementary documentation by adding a ticket attachment at this time. Attachments may be in the form of PDF or DOC files or images.</h5>
+                </div>
+            </div>
         </div>
     </div>
-
     <div class="card card-inverse ">
         <div class="card-header">
             @*<div class="card-title">Create A New Ticket</div>*@

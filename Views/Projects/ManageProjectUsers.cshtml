@@ -20,12 +20,21 @@
         <div class="card-block">
             <div class="form-group row">
                 <div class="col-md-6">
-                    <h4>Project Name:</h4>
+                    <h4>Project Name: </h4>
+                    <p style="padding-top:5px;"><h4>@Html.DisplayFor(model => model.Name)</h4></p>
                 </div>
                 <div class="col-md-6">
-                    <h4>@Html.DisplayFor(model => model.Name)</h4>
+                    @using (Html.BeginForm("ManageProjectUsers", "Projects", new { projectId = Model.Id }, FormMethod.Post))
+                    {
+                        <label class="control-label">Assign Project a new Manager:</label>
+                        @Html.AntiForgeryToken()
+                        @Html.DropDownList("ManagerId", null, "-select-", htmlAttributes: new { @class = "form-control" })
+                        <div style="padding-top: 3px;">
+                            <input type="submit" class="btn btn-info" value="Change Manager" />
+                        </div>
+                     }
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 <div class="row">
@@ -39,20 +48,14 @@
                     {
                         @Html.AntiForgeryToken()
                         <div class="form-group row">
-                            <label class="control-label col-lg-3">Assign Project Managers</label>
-                            <div class="col-lg-9">
-                                @Html.DropDownList("ManagerId", null, "-select-", htmlAttributes: new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="control-label col-lg-3">Add Developers to Projects</label>
-                            <div class="col-lg-9">
+                            <label class="control-label col-lg-4">Add Developers to Projects</label>
+                            <div class="col-lg-8">
                                 @Html.ListBox("DeveloperIds", null, htmlAttributes: new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-lg-3">Add Submitters to Projects</label>
-                            <div class="col-lg-9">
+                            <label class="control-label col-lg-4">Add Submitters to Projects</label>
+                            <div class="col-lg-8">
                                 @Html.ListBox("SubmitterIds", null, htmlAttributes: new { @class = "form-control" })
                             </div>
                         </div>
@@ -77,14 +80,14 @@
                             </div>
                         </div>*@
                         <div class="form-group row">
-                            <label class="control-label col-lg-3">Remove Developers from a Projects</label>
-                            <div class="col-lg-9">
+                            <label class="control-label col-lg-4">Remove Developers from a Projects</label>
+                            <div class="col-lg-8">
                                 @Html.ListBox("AssignedDeveloperIds", null, htmlAttributes: new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="control-label col-lg-3">Remove Submitters from a Projects</label>
-                            <div class="col-lg-9">
+                            <label class="control-label col-lg-4">Remove Submitters from a Projects</label>
+                            <div class="col-lg-8">
                                 @Html.ListBox("AssignedSubmitterIds", null, htmlAttributes: new { @class = "form-control" })
                             </div>
                         </div>
