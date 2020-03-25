@@ -1,5 +1,6 @@
 ﻿using bug_tracker.ChartModels;
 using bug_tracker.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace bug_tracker.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public JsonResult GetBarData(string property)
         {
+            var userId = User.Identity.GetUserId();
             var dataObject = new ChartJsBarData();
             switch (property)
             {
@@ -35,6 +37,13 @@ namespace bug_tracker.Controllers
                     {
                         dataObject.Labels.Add(status.Name);
                         dataObject.Data.Add(db.Tickets.AsNoTracking().Count(t => t.TicketStatusId == status.Id));
+                    }
+                    break;
+                case "User":
+                    foreach (var project in db.Projects.Where(p => p.ProjectManagerId == userId).ToList())
+                    {
+                        dataObject.Labels.Add(project.Name);
+                        dataObject.Data.Add(db.Tickets.AsNoTracking().Count(t => t.ProjectId == project.Id));
                     }
                     break;
             }

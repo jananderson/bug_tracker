@@ -73,59 +73,111 @@
                         </div>
                     </div>
                     <!-- /Software Updates -->
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <!-- Left col -->
-        <!-- Custom tabs (Charts with tabs)-->
-        <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
-            <div class="card-header">
-                <h3 style="color: black;">Tickets by Priority</h3>
-            </div>
-            <div>
-                <div style="margin-top: 25px;">
-                    <canvas id="barChart1" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+@if (User.IsInRole("Submitter") || User.IsInRole("Developer") || User.IsInRole("Admin"))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Left col -->
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
+                <div class="card-header">
+                    <h3 style="color: black;">Tickets by Priority</h3>
                 </div>
+                <div>
+                    <div style="margin-top: 25px;">
+                        <canvas id="barChart1" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
             </div>
-            <!-- /.card-body -->
+        </div>
+        <div class="col-md-4">
+            <!-- Left col -->
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
+                <div class="card-header">
+                    <h3 style="color: black;">Tickets by Type</h3>
+                </div>
+                <div>
+                    <div style="margin-top: 25px;">
+                        <canvas id="barChart2" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Left col -->
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
+                <div class="card-header">
+                    <h3 style="color: black;">Tickets by Status</h3>
+                </div>
+                <div>
+                    <div style="margin-top: 25px;">
+                        <canvas id="barChart3" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <!-- Left col -->
-        <!-- Custom tabs (Charts with tabs)-->
-        <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
-            <div class="card-header">
-                <h3 style="color: black;">Tickets by Type</h3>
-            </div>
-            <div>
-                <div style="margin-top: 25px;">
-                    <canvas id="barChart2" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+}
+@if (User.IsInRole("ProjectManager"))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Left col -->
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
+                <div class="card-header">
+                    <h3 style="color: black;">Tickets by Priority</h3>
                 </div>
+                <div>
+                    <div style="margin-top: 25px;">
+                        <canvas id="barChart4" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
             </div>
-            <!-- /.card-body -->
+        </div>
+        <div class="col-md-4">
+            <!-- Left col -->
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
+                <div class="card-header">
+                    <h3 style="color: black;">Tickets by Type</h3>
+                </div>
+                <div>
+                    <div style="margin-top: 25px;">
+                        <canvas id="barChart2" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Left col -->
+            <!-- Custom tabs (Charts with tabs)-->
+            <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
+                <div class="card-header">
+                    <h3 style="color: black;">Tickets by Status</h3>
+                </div>
+                <div>
+                    <div style="margin-top: 25px;">
+                        <canvas id="barChart3" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <!-- Left col -->
-        <!-- Custom tabs (Charts with tabs)-->
-        <div class="card card-inverse card-flat bg-light min-width-300 min-height-300">
-            <div class="card-header">
-                <h3 style="color: black;">Tickets by Status</h3>
-            </div>
-            <div>
-                <div style="margin-top: 25px;">
-                    <canvas id="barChart3" style="min-width: 100%; min-height: 100%; margin-bottom: 25px;"></canvas>
-                </div>
-            </div>
-            <!-- /.card-body -->
-        </div>
-    </div>
-</div>
+}
 <div class="row">
     <!-- Recent Tickets -->
     <div class="col-lg-12">
@@ -262,6 +314,47 @@
                 var barChartCanvas = $('#barChart3').get(0).getContext('2d');
                 new Chart(barChartCanvas, {
                     type: 'doughnut',
+                    data: {
+                        labels: response.Labels,
+                        datasets: [{
+                            label: "Tickets by status",
+                            data: response.Data,
+                            backgroundColor: [
+                                'rgba(60,141,188,0.9)',
+                                'rgba(210, 214, 222, 1)',
+                                'rgba(60,141,188,0.8)',
+                                'rgba(60,141,188,0.8)',
+                                'rgba(60,141,188,0.8)'
+                            ],
+                            borderColor: [
+                                'rgba(60,141,188,0.8)',
+                                'rgba(60,141,188,0.8)',
+                                'rgba(60,141,188,0.8)',
+                                'rgba(60,141,188,0.8)',
+                                'rgba(60,141,188,0.8)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{ gridLines: false, labels: false,
+                                ticks: {
+                                    display: false,
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                })
+            });
+        });
+        $(function () {
+            let url = '@Url.Action("GetBarData", "Charts", new { property = "User"})';
+            $.post(url).then(function (response) {
+                var barChartCanvas = $('#barChart4').get(0).getContext('2d');
+                new Chart(barChartCanvas, {
+                    type: 'pie',
                     data: {
                         labels: response.Labels,
                         datasets: [{

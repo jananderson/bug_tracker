@@ -194,6 +194,7 @@
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\ProjectCreateViewModel.cs" />
+    <Compile Include="Models\ProjectDetailsViewModel.cs" />
     <Compile Include="Models\ProjectManagerNameViewModel.cs" />
     <Compile Include="Models\TicketDetailsViewModel.cs" />
     <Compile Include="Models\RemoveUserRoleViewModel.cs" />
@@ -1824,6 +1825,7 @@
     <Content Include="Views\Shared\_LayoutAccount.cshtml" />
     <Content Include="Views\Projects\UserProjects.cshtml" />
     <Content Include="Views\Tickets\Details - Copy.cshtml" />
+    <Content Include="Views\Projects\ProjectDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,9 +12,10 @@ namespace bug_tracker.Helper
     {
         ApplicationDbContext db = new ApplicationDbContext();
         TicketHistory history = new TicketHistory();
-        public void GenerateHistory(Ticket oldTicket, Ticket newTicket, string UserId)//this may be wrong
+        public void GenerateHistory(Ticket oldTicket, Ticket newTicket, string UserId)
         {
             var user = db.Users.Find(UserId);
+
             if (oldTicket.Title != newTicket.Title)
             {
                 history.TicketId = newTicket.Id;
@@ -94,40 +95,6 @@ namespace bug_tracker.Helper
                 db.TicketHistories.Add(history);
                 db.SaveChanges();
             }
-            //var ext = Path.GetExtension(path);
-            //if(ext == ".pdf")
-            //{
-            //    return "/Images/default_pdf.jpg";
-            //}
-            //else if(ext == ".doc" || ext == ".docx")
-            //{
-            //    return "/Images/default_pdf.jpg";
-            //}
-            //else if (ext == ".jpg" || ext == ".png")
-            //{
-            //    return "/Images/default_pdf.jpg";
-            //}
-
-            //var defaultPath = "/Images/default_pdf.jpg";
-            //switch (Path.GetExtension(path))
-            //{
-            //    case ".pdf":
-            //        defaultPath = "/Images/default_pdf.jpg";
-            //        break;
-            //    case ".doc":
-            //    case ".docx":
-            //        defaultPath = "/Images/default_doc.png";
-            //        break;
-            //    case ".jpg":
-            //    case ".jpeg":
-            //    case ".png":
-            //    case ".bmp":
-            //    case ".gif":
-            //    case ".tif":
-            //        defaultPath = path; //this would default to the uploaded image
-            //        break;
-            //}
-            //return defaultPath;
         }
     }
 }

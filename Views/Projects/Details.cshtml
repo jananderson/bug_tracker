@@ -1,34 +1,144 @@
 ﻿@model bug_tracker.Models.Project
-
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>Details</h2>
-
-<div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProjectManagerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProjectManagerId)
-        </dd>
-
-    </dl>
+<div class="row">
+    <div class="card card-inverse card-flat col-12">
+        <div class="header">
+            <div class="header-content">
+                <div class="page-title">
+                    <i class="icon-briefcase x6 position-left"></i> Project Details
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="row">
+    <div class="card card-inverse card-flat col-12">
+        <div class="card-header">
+            @*<div class="card-title">Ticket Details</div>*@
+        </div>
+        <div class="card-block">
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <h5>
+                        On this page you can review all relevant project information.
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="card card-inverse card-flat col-12">
+        <div class="card-header">
+            @*<div class="card-title">Ticket Details</div>*@
+        </div>
+        <div class="card-block">
+            <div class="form-group row">
+                <div class="col-md-6">
+                    <h4>Project:</h4> <p>@Html.DisplayFor(model => model.Name)</p>
+                </div>
+                <div class="col-md-6">
+                    <h4>Project Manager:</h4> <p>@ViewBag.ProjectManagerName</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="card card-inverse card-flat col-6">
+        <div class="card-header">
+            <div class="card-title">Tickets</div>
+        </div>
+        <div class="card-block">
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <h5>
+                        @foreach (var ticket in Model.Tickets)
+                        {
+                            <p>@ticket.Title</p>
+                        }
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card card-inverse card-flat col-6">
+        <div class="card-header">
+            <div class="card-title">Users on Project</div>
+        </div>
+        <div class="card-block">
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <h5>
+                        @foreach (var user in Model.Users)
+                        {
+                            <p>@user.FirstName @user.LastName</p>
+                        }
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div>
+        <h4>Project</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectManagerId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProjectManagerId)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+
+
+
+
+
+@*@{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <div>
+        <h4>Project</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectManagerId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProjectManagerId)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

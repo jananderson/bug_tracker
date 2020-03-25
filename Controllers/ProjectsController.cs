@@ -301,6 +301,7 @@ namespace bug_tracker.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ProjectManagerName = db.Users.Find(project.ProjectManagerId).FirstName;
             return View(project);
         }
 
